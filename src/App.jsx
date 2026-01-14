@@ -5,6 +5,7 @@ import UsersList from './assets/components/Users'
 import Progressbar from './assets/components/Progressbar'
 
 import FilterUsers from "../src/assets/components/Filterusers";
+import TodoList from './assets/components/TodoList';
 import { useState } from 'react';
 function App() {
   const [progressPercent, setProgressPercent] = useState(0)
@@ -21,7 +22,7 @@ function App() {
       <br></br>
       <UsersList/>
       <FilterUsers/>
-      
+      <TodoList/>
     </>
   )
 }
