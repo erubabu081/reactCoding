@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+/* .outer{
+  @apply  h-5 rounded-sm w-125 border border-solid border-black m-[5px]
+}
+
+.inner {
+  text-align: right;
+  transition:  0.5s ease-in;
+  @apply h-5 bg-green-400 rounded-sm 
+} */
+
+
+.outer{
+  width: 400px;
+  border: solid 1px, black;
+   border-radius: 15px;
+  height: 20px;
+}
+
+.inner{
+  background-color: aquamarine;
+  height: 20px;
+  border-radius: 15px;
+  transition: 0.5s ease-in;
+}
+
+.searchInput {
+  width: 300px;
+}
+
+.outer-div{
+ width: 800px;
+ border: solid 1px black;
+ border-radius:10px;
+ height:20px; 
+ overflow-x: hidden;
+}
+.inner-div{
+  background-color: aquamarine;
+  width: 40%;
+  height: 20px;
+  transition: 0.5s ease-in;
+}
