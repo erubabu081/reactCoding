@@ -16,11 +16,11 @@ function App() {
   return (
     <>
       <h2>Progress Percent: {progressPercent}</h2>
-      <CounterApp />
+      {/* <CounterApp />
       <Progressbar changeProgress={changeProgressPercent} />
       <br></br>
       <UsersList />
-      <FilterUsers />
+      <FilterUsers /> */}
       <TodoList />
       <Otpinput />
     </>

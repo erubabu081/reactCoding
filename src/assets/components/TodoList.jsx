@@ -1,37 +1,81 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 const TodoList = () => {
-    const [taskName, setTaskName] = useState('');
-    const [taskList, setTaskList] = useState([])
-    const handleOnchage = (e) => {
-    setTaskName(e.target.value)
-    }
-const addTask = () => {
-    const taskObj = {
-        'id': Math.random(),
-        'taskName': taskName
-    }
-    setTaskList([...taskList, taskObj])
-    setTaskName('')
-   
-}
-const handleCheckBox = (id) => {
-    const newTaskList =taskList.filter(task => task.id !== id)
-setTaskList(newTaskList)
-console.log(newTaskList)
-}
+  const initialTask = [];
+  const [taskList, setTaskList] = useState(initialTask);
+  const [taskName, setTaskName] = useState("");
+
+  const addTask = () => {
+    const newTask = {
+      id: taskList.length + 1,
+      taskName: taskName,
+      completed: false,
+    };
+    const newtaskList = [...taskList, newTask];
+    setTaskList(newtaskList);
+    setTaskName("");
+  };
+  const handleOnchange = (val) => {
+    setTaskName(val);
+  };
+  const handleDeleteTask = (taskId) => {
+    const freshList = taskList.filter((item) => item.id !== taskId);
+    console.log(freshList);
+    setTaskList(freshList);
+  };
+  const handleCheckBox = (taskId) => {
+    console.log(taskId);
+    const newTask = taskList.map((task) =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task
+    );
+
+    setTaskList(newTask);
+  };
+
   return (
     <>
-    <div>TodoList</div> 
-    <input name='todolist' placeholder='Enter To do task' value= {taskName} onChange={(e) => handleOnchage(e)}></input>
-    <button name='submit' value='Submit' onClick={() =>addTask()}>Add Task</button>
-    {taskName}
-    { taskList.map((item) => (
-        <li key={item.id} onClick={() => handleCheckBox(item.id)}><span><input type= 'checkbox'></input></span>{item.taskName} </li>
-    ) ) }
-    
-    </>
-  )
-}
+      <h2>Todo List</h2>
+      <input
+        type="text"
+        name="taskItem"
+        placeholder="Enter to task item"
+        className="border w-100 h-15 p-3"
+        value={taskName}
+        onChange={(e) => handleOnchange(e.target.value)}
+      ></input>
+      <button
+        type="submit"
+        name="addItem"
+        className="bg-amber-300 border-teal-100 m-5 h-15 p-4"
+        onClick={() => addTask()}
+      >
+        Add
+      </button>
+      {taskName}
+      <h2>Task List</h2>
 
-export default TodoList
+      {taskList.map((item) => (
+        <div className="taskList" key={item.id}>
+          <input
+            type="checkbox"
+            name="checkbox"
+            checked={item.completed}
+            onClick={() => handleCheckBox(item.id)}
+          />
+          <span className={`${item.completed ? "line-through" : ""}`}>
+            {item.taskName}
+          </span>
+          <button
+            name="delete"
+            className="border-amber-400 p-3 border-2 rounded-2xl bg-amber-800 m-3 "
+            onClick={() => handleDeleteTask(item.id)}
+          >
+            Delete
+          </button>
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default TodoList;

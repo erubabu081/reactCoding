@@ -1,39 +1,43 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const Otpinput = () => {
-  //const [otpText, setOtpText] = useState('');
-  const otpArray = new Array(5).fill("");
-  const [inputArray, setInputArray] = useState(otpArray);
-  const inputref = useRef([]);
+  const otptxt = Array(5).fill("");
+  const [otpArray, setOtpArray] = useState(otptxt);
+  const refArray = useRef([]);
+
+  const handleOnChange = (e, index) => {
+    const val = e.target.value.slice(-1);
+    if (isNaN(val)) return;
+    const newArray = [...otpArray];
+    newArray[index] = val;
+    setOtpArray(newArray);
+    val && refArray.current[index + 1]?.focus();
+  };
 
   useEffect(() => {
-    inputref.current[0].focus();
+    refArray.current[0].focus();
   }, []);
-  const handleOnhange = (e, index) => {
-    if (isNaN(e.target.value)) return "";
-    const newInputArray = [...inputArray];
-    newInputArray[index] = e.target.value.slice(-1);
-    setInputArray(newInputArray);
-    e.target.value && inputref.current[index + 1]?.focus();
-  };
+
   const handleKeyDown = (e, index) => {
-    if (!e.target.value && e.key === "Backspace") {
-      inputref.current[index - 1]?.focus();
+    if (e.key === "Backspace" && e.target.value === "") {
+      refArray.current[index - 1].focus();
     }
   };
 
   return (
     <>
-      <div>Otp Input</div>
-      {inputArray.map((item, index) => (
+      <div>OTP INPUT</div>
+
+      {otpArray.map((item, index) => (
         <input
           type="text"
-          value={inputArray[index]}
-          onChange={(e) => handleOnhange(e, index)}
-          onKeyDown={(e) => handleKeyDown(e, index)}
           key={index}
-          ref={(item) => (inputref.current[index] = item)}
-          className="border-amber-500 border w-15 h-15"
+          name="otpText"
+          className="border p-5 w-15 h-15"
+          value={item}
+          ref={(item) => (refArray.current[index] = item)}
+          onChange={(e) => handleOnChange(e, index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
         ></input>
       ))}
     </>
